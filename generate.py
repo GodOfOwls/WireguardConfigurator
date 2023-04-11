@@ -92,6 +92,7 @@ interface_name = generate_interface_name()
 
 # Create a new WireGuard interface and let MikroTik generate its keypair
 ssh.exec_command(f"/interface wireguard add listen-port={unused_port} name={interface_name}")
+ssh.exec_command(f'/interface/list/member/add interface={interface_name} list=fremde_vpn')
 
 # Assign the WireGuard interface a /30 IP from the IP pool
 mikrotik_subnet = find_next_available_ip(IP_POOL)
